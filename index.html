@@ -4,255 +4,1154 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>极简导航</title>
+    <title>💘简约导航💘</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        /* 全局重置 - 兼容老浏览器 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft Yahei", Arial, sans-serif;
-        }
-
+        /* 全局重置 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
+            font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
             min-height: 100vh;
-            padding: 20px;
-            transition: background 0.3s ease;
         }
 
-        /* 毛玻璃容器 - 兼容降级 */
+        /* 容器 */
         .container {
-            max-width: 1000px;
+            max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            padding: 20px;
         }
 
-        /* IE兼容：移除不支持的backdrop-filter，改用纯色 */
-        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-            .container {
-                background: rgba(255, 255, 255, 0.8);
-            }
-        }
-
-        /* Logo样式 */
-        .logo {
+        /* 头部 */
+        header {
             text-align: center;
+            padding-top: 30px;
+            padding-bottom: 20px;
+        }
+        .logo-area {
+            display: inline-block;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border-radius: 10px;
+            display: inline-block;
+            line-height: 50px;
+            font-size: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            vertical-align: middle;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+        .logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .site-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            vertical-align: middle;
+        }
+        .site-subtitle {
+            font-size: 12px;
+            color: #666;
+            background: rgba(255,255,255,0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+
+        /* 搜索框 */
+        .search-wrapper {
+            display: flex;
+            justify-content: center;
             margin-bottom: 30px;
         }
-
-        .logo img {
-            max-width: 120px;
-            border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.5);
+        .search-box {
+            position: relative;
+            display: flex;
+            width: 500px; 
+            transition: width 0.3s;
         }
-
-        .logo h1 {
-            color: #333;
-            margin-top: 15px;
-            font-size: 24px;
-        }
-
-        /* 导航网格 */
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 20px;
-        }
-
-        /* IE兼容：改用flex布局 */
-        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-            .nav-grid {
-                display: -ms-flexbox;
-                display: flex;
-                -ms-flex-wrap: wrap;
-                flex-wrap: wrap;
-            }
-            .nav-item {
-                -ms-flex: 0 0 calc(25% - 20px);
-                flex: 0 0 calc(25% - 20px);
-                margin: 10px;
-            }
-        }
-
-        /* 导航项样式 */
-        .nav-item {
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .nav-item a {
-            display: block;
-            text-decoration: none;
-            color: #333;
-            padding: 15px 10px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.7);
-        }
-
-        .nav-item a:hover {
-            background: rgba(255, 255, 255, 0.8);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-item img {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-
-        .nav-item span {
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            padding-right: 70px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
             font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.9);
+        }
+        .search-btn {
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            bottom: 4px;
+            width: 60px;
+            border-radius: 40px;
+            border: none;
+            background: #409EFF;
+            color: #fff;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* 分类卡片 */
+        .category-card {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .category-header {
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .category-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+        .category-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #444;
+            display: flex;
+            align-items: center;
+            cursor: default;
+        }
+        .category-title i { margin-right: 8px; color: #409EFF; }
+        
+        .cat-action-btn {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            display: none;
+            margin-left: 5px;
+        }
+        .btn-rename { background: #e6f7ff; color: #1890ff; border: 1px solid #91d5ff; }
+        .btn-del-cat { background: #fff1f0; color: #f5222d; border: 1px solid #ffa39e; }
+
+        .add-link-btn {
+            background: #409EFF;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* 链接网格 */
+        .link-grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -6px; 
+        }
+        .link-item {
+            width: 20%; 
+            padding: 6px;
+            overflow: hidden; 
+            position: relative;
+        }
+        .link-card {
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .link-card:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            z-index: 2;
+        }
+        .link-icon {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+        .link-icon img { width: 100%; height: 100%; object-fit: contain; }
+        .link-icon-text { 
+            font-size: 28px; 
+            line-height: 32px; 
+            display: block;
+        }
+        
+        .link-name {
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2px;
+            display: block;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            width: 100%;
+        }
+        .link-desc {
+            font-size: 11px;
+            color: #999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            line-height: 1.2;
         }
 
-        /* 响应式适配 */
-        @media (max-width: 768px) {
-            .nav-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            }
-            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                .nav-item {
-                    -ms-flex: 0 0 calc(33.33% - 20px);
-                    flex: 0 0 calc(33.33% - 20px);
-                }
-            }
+        /* 编辑按钮 */
+        .link-edit-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: #409EFF;
+            color: #fff;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            cursor: pointer;
+            z-index: 20;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
+        .link-edit-btn:hover { background: #66b1ff; transform: scale(1.1); }
 
-        @media (max-width: 480px) {
-            .nav-grid {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            }
-            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                .nav-item {
-                    -ms-flex: 0 0 calc(50% - 20px);
-                    flex: 0 0 calc(50% - 20px);
-                }
-            }
+        /* 添加新分栏按钮 */
+        .add-category-box {
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            color: #999;
+            cursor: pointer;
+            display: none;
+            margin-bottom: 25px;
+            background: rgba(255,255,255,0.5);
+            transition: all 0.2s;
         }
+        .add-category-box:hover {
+            border-color: #409EFF;
+            color: #409EFF;
+            background: rgba(255,255,255,0.8);
+        }
+        .add-category-box i { font-size: 24px; margin-bottom: 10px; display: block; }
 
-        /* 管理入口 */
-        .admin-entrance {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            text-decoration: none;
+        /* 底部 */
+        footer {
+            text-align: center;
+            padding: 20px;
             color: #666;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 12px;
+        }
+        .footer-pill {
+            display: inline-block;
+            background: rgba(255,255,255,0.8);
+            padding: 6px 15px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 右下角菜单 */
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+        .fab-btn {
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            color: #333;
+            transition: all 0.3s;
+        }
+        .fab-btn.active {
+            transform: rotate(90deg);
+            background: #409EFF;
+            color: #fff;
+        }
+        
+        /* 菜单 */
+        .fab-menu {
+            position: absolute;
+            bottom: 55px;
+            right: 0;
+            background: #333;
+            color: #fff;
+            border-radius: 6px;
+            padding: 5px 0;
+            width: 140px;
+            display: none !important;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-size: 13px;
+            z-index: 101;
+        }
+        
+        .fab-menu.show {
+            display: flex !important;
+            flex-direction: column;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fab-item {
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .fab-item:hover { background: #444; }
+        .fab-item i { width: 18px; margin-right: 8px; text-align: center; font-size: 12px; }
+        .fab-item.danger { color: #ff6b6b; }
+
+        /* 弹窗 */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            width: 95%;
+            max-width: 450px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-title { font-size: 16px; font-weight: bold; margin-bottom: 15px; border-left: 4px solid #409EFF; padding-left: 10px; }
+        .form-group { margin-bottom: 12px; }
+        .form-label { display: block; font-size: 12px; color: #666; margin-bottom: 4px; }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .btn-group { text-align: right; margin-top: 20px; }
+        .btn {
+            padding: 6px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            margin-left: 8px;
+        }
+        .btn-primary { background: #409EFF; color: #fff; }
+        .btn-success { background: #67C23A; color: #fff; }
+        .btn-danger { background: #F56C6C; color: #fff; }
+        .btn-default { background: #f0f0f0; color: #333; }
+        
+        .range-wrap { display: flex; align-items: center; gap: 10px; }
+        .range-wrap input { flex: 1; }
+        .range-val { font-size: 12px; color: #409EFF; font-weight: bold; width: 30px; text-align: right;}
+        
+        /* 壁纸设置样式 */
+        .wallpaper-preview {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            background-size: cover;
+            background-position: center;
+            background-color: #f5f5f5;
+        }
+        .upload-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        .upload-btn:hover { background: #e0e0e0; }
+
+        @media (max-width: 768px) {
+            .link-item { width: 33.33%; }
+            .search-box { width: 90% !important; }
         }
     </style>
 </head>
 <body>
-    <!-- 管理入口 -->
-    <a href="admin.html" class="admin-entrance">管理后台</a>
 
-    <div class="container" id="mainContainer">
-        <!-- Logo区域 -->
-        <div class="logo" id="logoContainer">
-            <img src="" alt="Logo" id="logoImg">
-            <h1 id="siteTitle">我的极简导航</h1>
+    <div class="container">
+        <header>
+            <div class="logo-area" onclick="location.reload()">
+                <div class="logo-icon" id="headerLogo">🍎</div>
+                <span class="site-title" id="siteTitle">简约导航</span>
+                <span class="site-subtitle" id="siteSubtitle">让上网更简单</span>
+            </div>
+            
+            <div class="search-wrapper">
+                <div class="search-box" id="searchBox">
+                    <input type="text" class="search-input" id="searchInput" placeholder="搜索资源...">
+                    <button class="search-btn" onclick="doSearch()">搜索</button>
+                </div>
+            </div>
+        </header>
+
+        <div id="contentArea"></div>
+
+        <!-- 添加新分栏按钮 -->
+        <div class="add-category-box" id="addCatBox" onclick="addNewCategory()">
+            <i class="fa fa-plus-circle"></i>
+            <span>点击添加新分栏</span>
         </div>
 
-        <!-- 导航区域 -->
-        <div class="nav-grid" id="navContainer">
-            <!-- 由JS动态生成导航项 -->
+        <footer>
+            <div class="footer-pill" id="footerText">CopyRight © 简约导航</div>
+        </footer>
+    </div>
+
+    <!-- 右下角菜单 -->
+    <div class="fab-container">
+        <!-- 管理员菜单 -->
+        <div class="fab-menu" id="adminMenu">
+            <div class="fab-item" onclick="openSettings()"><i class="fa fa-gear"></i> 全局设置</div>
+            <div class="fab-item" onclick="toggleEditMode()"><i class="fa fa-pencil"></i> <span id="editModeText">编辑：关</span></div>
+            <div class="fab-item danger" onclick="logout()"><i class="fa fa-power-off"></i> 退出</div>
+        </div>
+        <!-- 游客菜单 (登录) -->
+        <div class="fab-menu" id="guestMenu">
+            <div class="fab-item" onclick="openLogin()"><i class="fa fa-sign-in"></i> 管理员登录</div>
+        </div>
+        
+        <div class="fab-btn" id="fabBtn" onclick="toggleFabMenu()">
+            <i class="fa fa-bars" id="fabIcon"></i>
+        </div>
+    </div>
+
+    <!-- 登录弹窗 -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-title">管理员登录</div>
+            <div style="background:#fff0f0; color:#f56c6c; padding:8px; font-size:12px; margin-bottom:15px; border-radius:4px;">
+                <i class="fa fa-exclamation-circle"></i> 提示：纯前端页面仅供防误触。
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-input" id="passwordInput" placeholder="密码">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-default" onclick="closeModal('loginModal')">取消</button>
+                <button class="btn btn-primary" onclick="checkLogin()">进入</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置弹窗 - 新增壁纸功能 -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-title">全局设置</div>
+            
+            <div class="form-group">
+                <label class="form-label">每行显示数量 (分栏)</label>
+                <select class="form-select" id="setLayoutCols">
+                    <option value="3">3 列 (大)</option>
+                    <option value="4">4 列 (中)</option>
+                    <option value="5">5 列 (标准)</option>
+                    <option value="6">6 列 (紧凑)</option>
+                    <option value="7">7 列 (密集)</option>
+                    <option value="8">8 列 (极客)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">图标大小 (px)</label>
+                <div class="range-wrap">
+                    <input type="range" id="setIconSize" min="24" max="64" step="4" oninput="document.getElementById('sizeVal').innerText=this.value+'px'">
+                    <span id="sizeVal" class="range-val">32px</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">搜索框宽度 (px)</label>
+                <div class="range-wrap">
+                    <input type="range" id="setSearchWidth" min="300" max="800" step="10" oninput="document.getElementById('widthVal').innerText=this.value+'px'">
+                    <span id="widthVal" class="range-val">500px</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">搜索框提示文字</label>
+                <input type="text" class="form-input" id="setSearchPlaceholder" placeholder="例如：搜索资源、软件...">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">网站标题</label>
+                <input type="text" class="form-input" id="newSiteTitle">
+            </div>
+            <div class="form-group">
+                <label class="form-label">副标题</label>
+                <input type="text" class="form-input" id="newSiteSub">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Logo (Emoji 或 URL)</label>
+                <input type="text" class="form-input" id="newSiteLogo">
+            </div>
+            
+            <!-- 壁纸设置 -->
+            <div class="form-group">
+                <label class="form-label">背景壁纸</label>
+                <div id="wallpaperPreview" class="wallpaper-preview"></div>
+                <div style="margin-bottom: 8px;">
+                    <label class="upload-btn">
+                        <i class="fa fa-upload"></i> 上传本地图片
+                        <input type="file" id="wallpaperFile" accept="image/*" style="display:none" onchange="handleWallpaperUpload(this)">
+                    </label>
+                    <button class="btn btn-default" onclick="clearWallpaper()" style="font-size:12px;">
+                        <i class="fa fa-trash"></i> 清除壁纸
+                    </button>
+                </div>
+                <input type="text" class="form-input" id="newBgUrl" placeholder="或输入图片URL">
+                <p style="font-size:11px; color:#999; margin-top:5px;">
+                    <i class="fa fa-info-circle"></i> 上传或设置壁纸后，所有访问者都会看到相同的背景
+                </p>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">页脚内容</label>
+                <input type="text" class="form-input" id="newFooter">
+            </div>
+            <div class="form-group">
+                <label class="form-label">修改密码</label>
+                <input type="text" class="form-input" id="newPassword">
+            </div>
+            
+            <div class="form-group" style="background:#f9fafc; padding:10px; border-radius:4px; border:1px solid #eee;">
+                <label class="form-label" style="font-weight:bold; margin-bottom:8px; display:block;">数据备份</label>
+                <button class="btn btn-default" style="font-size:12px;" onclick="exportData()">导出数据</button>
+                <label class="btn btn-primary" style="font-size:12px; display:inline-block; cursor:pointer;">
+                    导入数据
+                    <input type="file" style="display:none;" accept=".json" onchange="importData(this)">
+                </label>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-default" onclick="closeModal('settingsModal')">取消</button>
+                <button class="btn btn-success" onclick="saveSettings()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑链接弹窗 -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal-content">
+            <div class="modal-title" id="editModalTitle">编辑链接</div>
+            <input type="hidden" id="editCatIndex">
+            <input type="hidden" id="editLinkIndex">
+            
+            <div class="form-group">
+                <label class="form-label">名称</label>
+                <input type="text" class="form-input" id="editName">
+            </div>
+            <div class="form-group">
+                <label class="form-label">链接地址 (URL)</label>
+                <div style="display:flex; gap:5px;">
+                    <input type="text" class="form-input" id="editUrl" onblur="autoFetchMeta()">
+                    <button class="btn btn-success" style="padding:6px 10px; white-space:nowrap;" onclick="autoFetchMeta()">
+                        <i class="fa fa-magic"></i> 识别
+                    </button>
+                </div>
+                <div style="font-size:11px; color:#666; margin-top:4px;">
+                    <i class="fa fa-info-circle"></i> 点击"识别"自动获取域名图标
+                </div>
+                <div style="margin-top:4px;">
+                    <a href="javascript:void(0)" onclick="simulateFileUpload()" style="color:#409EFF; text-decoration:none; font-size:12px;">
+                        <i class="fa fa-cloud-upload"></i> 上传文件供下载 (说明)
+                    </a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">备注说明</label>
+                <input type="text" class="form-input" id="editDesc" placeholder="如：v1.0 官方版">
+            </div>
+            <div class="form-group">
+                <label class="form-label">图标 (自动获取或手动)</label>
+                <div style="display:flex; gap:5px; align-items:center;">
+                    <input type="text" class="form-input" id="editIcon" oninput="updateIconPreview(this.value)">
+                    <div id="iconPreview" style="width:32px; height:32px; border:1px solid #ddd; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:20px; background:#fff; flex-shrink:0;"></div>
+                </div>
+            </div>
+
+            <div class="btn-group" style="display:flex; justify-content:space-between;">
+                <button class="btn btn-danger" onclick="deleteItem()">删除</button>
+                <div>
+                    <button class="btn btn-default" onclick="closeModal('editModal')">取消</button>
+                    <button class="btn btn-success" onclick="saveEdit()">保存</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // 默认配置
-        const defaultConfig = {
-            siteTitle: "我的极简导航",
-            logoUrl: "https://picsum.photos/120/120",
-            backgroundUrl: "https://picsum.photos/1920/1080?blur=2",
-            containerOpacity: 0.2,
-            blurRadius: 10,
-            websites: [
-                { name: "百度", url: "https://www.baidu.com", icon: "https://www.baidu.com/favicon.ico" },
-                { name: "GitHub", url: "https://github.com", icon: "https://github.githubassets.com/favicons/favicon.ico" },
-                { name: "B站", url: "https://www.bilibili.com", icon: "https://static.hdslb.com/mobile/img/favicon.ico" }
+        // --- 数据初始化 ---
+        var defaultData = {
+            password: 'admin',
+            footer: 'CopyRight © 简约导航',
+            bgUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop', // 默认壁纸
+            siteTitle: '简约导航',
+            siteSubtitle: '让上网更简单',
+            siteLogo: '🍎',
+            layout: {
+                cols: 5,
+                iconSize: 32
+            },
+            search: {
+                engine: 'https://www.baidu.com/s?wd=',
+                placeholder: '搜索资源、软件、教程...',
+                width: 500
+            },
+            categories: [
+                { 
+                    title: '🚀 必备软件', 
+                    links: [
+                        { name: 'Google Chrome', url: 'https://www.google.cn/chrome/', icon: 'https://www.google.cn/chrome/favicon.ico', desc: '全球最流行浏览器' },
+                        { name: 'Microsoft Edge', url: 'https://www.microsoft.com/zh-cn/edge', icon: 'https://www.microsoft.com/favicon.ico', desc: 'Windows自带' },
+                        { name: '百分浏览器', url: 'https://www.centbrowser.cn/', icon: 'https://www.centbrowser.cn/favicon.ico', desc: '极速好用' }
+                    ]
+                },
+                { 
+                    title: '💼 办公通讯', 
+                    links: [
+                        { name: '微信下载', url: 'https://weixin.qq.com/', icon: 'https://weixin.qq.com/favicon.ico', desc: '官方正式版' },
+                        { name: '钉钉', url: 'https://www.dingtalk.com/', icon: 'https://www.dingtalk.com/favicon.ico', desc: '让进步发生' },
+                        { name: 'WPS Office', url: 'https://www.wps.cn/', icon: 'https://www.wps.cn/favicon.ico', desc: '国产办公软件' },
+                        { name: '向日葵远程', url: 'https://sunlogin.oray.com/', icon: 'https://sunlogin.oray.com/favicon.ico', desc: '远程控制在手心' }
+                    ]
+                },
+                { 
+                    title: '💰 商家经营', 
+                    links: [
+                        { name: '美团外卖商家', url: 'https://e.waimai.meituan.com/', icon: 'https://e.waimai.meituan.com/favicon.ico', desc: '美团商家版' },
+                        { name: '淘宝闪购', url: 'https://sell.taobao.com/', icon: 'https://www.taobao.com/favicon.ico', desc: '淘宝卖家中心' },
+                        { name: '京东秒送', url: 'https://www.jd.com/', icon: 'https://www.jd.com/favicon.ico', desc: '京东商家后台' }
+                    ]
+                }
             ]
         };
 
-        // 获取配置（优先localStorage，没有则用默认）
-        function getConfig() {
-            const savedConfig = localStorage.getItem('navConfig');
-            return savedConfig ? JSON.parse(savedConfig) : defaultConfig;
+        var appData;
+        var isAdmin = false;
+        var isEditMode = false;
+
+        // --- 初始化 ---
+        function init() {
+            try {
+                var stored = localStorage.getItem('navData');
+                if (stored) {
+                    appData = JSON.parse(stored);
+                    if (!appData.layout) appData.layout = { cols: 5, iconSize: 32 };
+                    if (!appData.search) appData.search = { engine: 'https://www.baidu.com/s?wd=', placeholder: '搜索...', width: 500 };
+                    if (!appData.bgUrl) appData.bgUrl = defaultData.bgUrl; // 如果没有壁纸，使用默认
+                } else {
+                    appData = JSON.parse(JSON.stringify(defaultData));
+                }
+            } catch (e) {
+                console.log('Storage error', e);
+                appData = JSON.parse(JSON.stringify(defaultData));
+            }
+            render();
         }
 
-        // 渲染页面
-        function renderPage() {
-            const config = getConfig();
-            
-            // 设置背景
-            document.body.style.background = `url('${config.backgroundUrl}') no-repeat center center fixed`;
-            document.body.style.backgroundSize = 'cover';
-            
-            // 设置容器透明度和模糊度
-            const container = document.getElementById('mainContainer');
-            container.style.background = `rgba(255, 255, 255, ${config.containerOpacity})`;
-            container.style.backdropFilter = `blur(${config.blurRadius}px)`;
-            container.style.webkitBackdropFilter = `blur(${config.blurRadius}px)`;
-            
-            // 设置Logo和标题
-            document.getElementById('logoImg').src = config.logoUrl;
-            document.getElementById('siteTitle').textContent = config.siteTitle;
-            
-            // 渲染导航项
-            renderNavItems(config.websites);
+        function saveData() {
+            try {
+                localStorage.setItem('navData', JSON.stringify(appData));
+            } catch (e) { alert('保存失败'); }
+            render();
         }
 
-        // 动态生成导航项
-        function renderNavItems(websites) {
-            const container = document.getElementById('navContainer');
-            container.innerHTML = '';
+        function render() {
+            applyLayout();
 
-            websites.forEach(site => {
-                const item = document.createElement('div');
-                item.className = 'nav-item';
+            document.getElementById('siteTitle').innerText = appData.siteTitle;
+            document.getElementById('siteSubtitle').innerText = appData.siteSubtitle;
+            document.getElementById('footerText').innerHTML = appData.footer;
+            
+            var searchInput = document.getElementById('searchInput');
+            searchInput.placeholder = appData.search.placeholder || '搜索...';
+            
+            var logoEl = document.getElementById('headerLogo');
+            if (appData.siteLogo && appData.siteLogo.indexOf('http') === 0) {
+                logoEl.innerHTML = '<img src="' + appData.siteLogo + '">';
+            } else {
+                logoEl.innerText = appData.siteLogo || '🍎';
+            }
+
+            // 应用壁纸
+            if (appData.bgUrl) {
+                document.body.style.backgroundImage = "url('" + appData.bgUrl + "')";
+            }
+
+            // 菜单控制
+            var adminMenu = document.getElementById('adminMenu');
+            var guestMenu = document.getElementById('guestMenu');
+            
+            adminMenu.classList.remove('show');
+            guestMenu.classList.remove('show');
+            
+            if (isAdmin) {
+                adminMenu.style.display = 'none';
+                guestMenu.style.display = 'none';
+            } else {
+                adminMenu.style.display = 'none';
+                guestMenu.style.display = 'none';
+            }
+
+            document.getElementById('editModeText').innerText = isEditMode ? '编辑：开' : '编辑：关';
+            document.getElementById('editModeText').style.color = isEditMode ? '#67C23A' : '#fff';
+
+            var addCatBox = document.getElementById('addCatBox');
+            if (isAdmin && isEditMode) {
+                addCatBox.style.display = 'block';
+            } else {
+                addCatBox.style.display = 'none';
+            }
+
+            // 渲染内容
+            var contentHtml = '';
+            for (var i = 0; i < appData.categories.length; i++) {
+                var cat = appData.categories[i];
+                var catHtml = '<div class="category-card">';
                 
-                const link = document.createElement('a');
-                link.href = site.url;
-                link.target = '_blank'; // 新窗口打开
+                catHtml += '<div class="category-header">';
+                catHtml += '<div class="category-title-group">';
+                catHtml += '<div class="category-title">' + cat.title + '</div>';
                 
-                const icon = document.createElement('img');
-                icon.src = site.icon || "https://picsum.photos/40/40";
-                icon.alt = site.name;
+                if (isAdmin && isEditMode) {
+                    catHtml += '<button class="cat-action-btn btn-rename" style="display:inline-block" onclick="renameCategory(' + i + ')" title="重命名分栏"><i class="fa fa-pencil"></i></button>';
+                    catHtml += '<button class="cat-action-btn btn-del-cat" style="display:inline-block" onclick="deleteCategory(' + i + ')" title="删除分栏"><i class="fa fa-trash"></i></button>';
+                }
+                catHtml += '</div>'; 
+
+                if (isAdmin && isEditMode) {
+                    catHtml += '<button class="add-link-btn" style="display:inline-block;" onclick="addLink(' + i + ')">+ 添加链接</button>';
+                }
+                catHtml += '</div>'; 
                 
-                const name = document.createElement('span');
-                name.textContent = site.name;
-                
-                link.appendChild(icon);
-                link.appendChild(name);
-                item.appendChild(link);
-                container.appendChild(item);
-            });
+                catHtml += '<div class="link-grid">';
+                for (var j = 0; j < cat.links.length; j++) {
+                    var link = cat.links[j];
+                    var iconHtml = '';
+                    if (link.icon) {
+                        if (link.icon.indexOf('http') === 0) {
+                            iconHtml = '<img src="' + link.icon + '" alt="icon">';
+                        } else {
+                            iconHtml = '<span class="link-icon-text">' + link.icon + '</span>';
+                        }
+                    } else {
+                        iconHtml = '<span class="link-icon-text" style="color:#ccc;"><i class="fa fa-link"></i></span>';
+                    }
+
+                    var editBtnHtml = '';
+                    if (isAdmin && isEditMode) {
+                        editBtnHtml = '<div class="link-edit-btn" style="display:flex" onclick="event.stopPropagation(); event.preventDefault(); openEditLink(' + i + ', ' + j + ')" title="编辑"><i class="fa fa-pencil"></i></div>';
+                    }
+
+                    catHtml += '<div class="link-item">';
+                    catHtml += '<a href="' + link.url + '" target="_blank" class="link-card">';
+                    catHtml += editBtnHtml;
+                    catHtml += '<div class="link-icon">' + iconHtml + '</div>';
+                    catHtml += '<span class="link-name">' + link.name + '</span>';
+                    if (link.desc) catHtml += '<span class="link-desc">' + link.desc + '</span>';
+                    catHtml += '</a>';
+                    catHtml += '</div>';
+                }
+                catHtml += '</div></div>';
+                contentHtml += catHtml;
+            }
+            document.getElementById('contentArea').innerHTML = contentHtml;
         }
 
-        // IE兼容：修复addEventListener
-        if (!Element.prototype.addEventListener) {
-            Element.prototype.addEventListener = function (event, func) {
-                this.attachEvent('on' + event, func);
+        function applyLayout() {
+            var cols = appData.layout.cols || 5;
+            var size = appData.layout.iconSize || 32;
+            var searchWidth = appData.search.width || 500;
+
+            var items = document.getElementsByClassName('link-item');
+            for (var i = 0; i < items.length; i++) {
+                items[i].style.width = (100 / cols) + '%';
+            }
+            
+            var icons = document.getElementsByClassName('link-icon');
+            for (var i = 0; i < icons.length; i++) {
+                icons[i].style.width = size + 'px';
+                icons[i].style.height = size + 'px';
+                var textIcon = icons[i].querySelector('.link-icon-text');
+                if (textIcon) {
+                    textIcon.style.lineHeight = size + 'px';
+                    textIcon.style.fontSize = (size * 0.9) + 'px';
+                }
+            }
+
+            document.getElementById('searchBox').style.width = searchWidth + 'px';
+        }
+
+        // --- 壁纸处理函数 ---
+        function handleWallpaperUpload(input) {
+            var file = input.files[0];
+            if (!file) return;
+            
+            if (file.size > 2 * 1024 * 1024) {
+                alert('图片大小不能超过2MB');
+                return;
+            }
+            
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var base64 = e.target.result;
+                document.getElementById('wallpaperPreview').style.backgroundImage = 'url(' + base64 + ')';
+                document.getElementById('newBgUrl').value = base64;
             };
+            reader.readAsDataURL(file);
+        }
+        
+        function clearWallpaper() {
+            document.getElementById('wallpaperPreview').style.backgroundImage = 'none';
+            document.getElementById('newBgUrl').value = '';
         }
 
-        // 页面加载完成后渲染
-        window.onload = renderPage;
+        // --- 菜单切换 ---
+        function toggleFabMenu() {
+            var adminMenu = document.getElementById('adminMenu');
+            var guestMenu = document.getElementById('guestMenu');
+            var fabBtn = document.getElementById('fabBtn');
+            var fabIcon = document.getElementById('fabIcon');
+            
+            var currentMenu = isAdmin ? adminMenu : guestMenu;
+            
+            if (currentMenu.classList.contains('show')) {
+                currentMenu.classList.remove('show');
+                fabBtn.classList.remove('active');
+                fabIcon.className = 'fa fa-bars';
+            } else {
+                currentMenu.classList.add('show');
+                fabBtn.classList.add('active');
+                fabIcon.className = 'fa fa-times';
+            }
+        }
+
+        // --- 交互 ---
+        function doSearch() {
+            var val = document.getElementById('searchInput').value;
+            if (val) {
+                var engine = appData.search.engine;
+                window.open(engine + encodeURIComponent(val), '_blank');
+            }
+        }
+        document.getElementById('searchInput').onkeypress = function(e) {
+            if ((e || window.event).keyCode === 13) doSearch();
+        };
+
+        function openLogin() {
+            closeFabMenu();
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('passwordInput').focus();
+        }
+        function checkLogin() {
+            if (document.getElementById('passwordInput').value === appData.password) {
+                isAdmin = true;
+                closeModal('loginModal');
+                document.getElementById('passwordInput').value = '';
+                closeFabMenu();
+                render();
+            } else { alert('密码错误'); }
+        }
+        function logout() {
+            isAdmin = false;
+            isEditMode = false;
+            closeFabMenu();
+            render();
+        }
+        
+        function closeFabMenu() {
+            var adminMenu = document.getElementById('adminMenu');
+            var guestMenu = document.getElementById('guestMenu');
+            var fabBtn = document.getElementById('fabBtn');
+            var fabIcon = document.getElementById('fabIcon');
+            
+            adminMenu.classList.remove('show');
+            guestMenu.classList.remove('show');
+            fabBtn.classList.remove('active');
+            fabIcon.className = 'fa fa-bars';
+        }
+        
+        function toggleEditMode() {
+            if (!isAdmin) return;
+            isEditMode = !isEditMode;
+            closeFabMenu();
+            setTimeout(function() { render(); }, 50);
+        }
+
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        // --- 智能识别图标 ---
+        function autoFetchMeta() {
+            var urlInput = document.getElementById('editUrl');
+            var iconInput = document.getElementById('editIcon');
+            var nameInput = document.getElementById('editName');
+            var url = urlInput.value;
+
+            if (!url) return;
+            if (url.indexOf('http') !== 0) url = 'https://' + url;
+            
+            try {
+                var a = document.createElement('a');
+                a.href = url;
+                var hostname = a.hostname;
+                var protocol = a.protocol;
+                
+                var faviconUrl = protocol + '//' + hostname + '/favicon.ico';
+                
+                iconInput.value = faviconUrl;
+                updateIconPreview(faviconUrl);
+
+                if (!nameInput.value) {
+                    var cleanName = hostname.replace('www.', '').split('.')[0];
+                    cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+                    nameInput.value = cleanName;
+                }
+            } catch (e) {
+                console.log('URL parse error', e);
+            }
+        }
+
+        function simulateFileUpload() {
+            alert('提示：静态网页无法存储文件。\n请将文件上传至网盘，复制链接填入"链接地址"栏，名称填文件名，备注填提取码。');
+        }
+
+        // --- 编辑链接逻辑 ---
+        function openEditLink(catIndex, linkIndex) {
+            if (!isAdmin || !isEditMode) return;
+
+            document.getElementById('editCatIndex').value = catIndex;
+            document.getElementById('editLinkIndex').value = linkIndex;
+            document.getElementById('editModalTitle').innerText = '编辑链接';
+            var link = appData.categories[catIndex].links[linkIndex];
+            document.getElementById('editName').value = link.name;
+            document.getElementById('editUrl').value = link.url;
+            document.getElementById('editDesc').value = link.desc || '';
+            document.getElementById('editIcon').value = link.icon || '';
+            updateIconPreview(link.icon);
+            document.getElementById('editModal').style.display = 'flex';
+        }
+        function addLink(catIndex) {
+            document.getElementById('editCatIndex').value = catIndex;
+            document.getElementById('editLinkIndex').value = -1;
+            document.getElementById('editModalTitle').innerText = '添加链接';
+            document.getElementById('editName').value = '';
+            document.getElementById('editUrl').value = '';
+            document.getElementById('editDesc').value = '';
+            document.getElementById('editIcon').value = '';
+            updateIconPreview('');
+            document.getElementById('editModal').style.display = 'flex';
+        }
+        function saveEdit() {
+            var catIdx = parseInt(document.getElementById('editCatIndex').value);
+            var linkIdx = parseInt(document.getElementById('editLinkIndex').value);
+            var name = document.getElementById('editName').value;
+            var icon = document.getElementById('editIcon').value;
+            if (!name) { alert('名称不能为空'); return; }
+            var url = document.getElementById('editUrl').value;
+            var desc = document.getElementById('editDesc').value;
+            if (!url) { alert('链接不能为空'); return; }
+
+            if (linkIdx === -1) {
+                appData.categories[catIdx].links.push({ name: name, url: url, icon: icon, desc: desc });
+            } else {
+                appData.categories[catIdx].links[linkIdx] = { name: name, url: url, icon: icon, desc: desc };
+            }
+            saveData();
+            closeModal('editModal');
+        }
+        function deleteItem() {
+            if (!confirm('确定删除？')) return;
+            var catIdx = parseInt(document.getElementById('editCatIndex').value);
+            var linkIdx = parseInt(document.getElementById('editLinkIndex').value);
+            appData.categories[catIdx].links.splice(linkIdx, 1);
+            saveData();
+            closeModal('editModal');
+        }
+        function updateIconPreview(val) {
+            var preview = document.getElementById('iconPreview');
+            if (!val) { preview.innerHTML = ''; preview.style.background = '#fff'; }
+            else if (val.indexOf('http') === 0) { 
+                preview.innerHTML = '<img src="' + val + '" style="width:100%; height:100%;">'; 
+                preview.style.background = 'white';
+            } else { 
+                preview.innerHTML = val; 
+                preview.style.background = '#f9fafb';
+            }
+        }
+
+        // --- 分栏管理功能 ---
+        function addNewCategory() {
+            var name = prompt("请输入新分栏的名称（支持 Emoji，例如：🎮 游戏娱乐）：");
+            if (name) {
+                appData.categories.push({
+                    title: name,
+                    links: []
+                });
+                saveData();
+                setTimeout(function() {
+                    window.scrollTo(0, document.body.scrollHeight);
+                }, 100);
+            }
+        }
+
+        function renameCategory(index) {
+            var newName = prompt("修改分栏名称：", appData.categories[index].title);
+            if (newName) {
+                appData.categories[index].title = newName;
+                saveData();
+            }
+        }
+
+        function deleteCategory(index) {
+            if (confirm("确定要删除这个分栏吗？里面的链接也会被一起删除！")) {
+                appData.categories.splice(index, 1);
+                saveData();
+            }
+        }
+
+        // --- 设置逻辑 ---
+        function openSettings() {
+            if (!isAdmin) return;
+            closeFabMenu();
+            
+            document.getElementById('newSiteTitle').value = appData.siteTitle;
+            document.getElementById('newSiteSub').value = appData.siteSubtitle;
+            document.getElementById('newSiteLogo').value = appData.siteLogo || '';
+            document.getElementById('newFooter').value = appData.footer;
+            document.getElementById('newPassword').value = appData.password;
+            document.getElementById('newBgUrl').value = appData.bgUrl || '';
+            
+            // 显示壁纸预览
+            if (appData.bgUrl) {
+                document.getElementById('wallpaperPreview').style.backgroundImage = 'url(' + appData.bgUrl + ')';
+            } else {
+                document.getElementById('wallpaperPreview').style.backgroundImage = 'none';
+            }
+            
+            document.getElementById('setLayoutCols').value = appData.layout.cols;
+            document.getElementById('setIconSize').value = appData.layout.iconSize;
+            document.getElementById('sizeVal').innerText = appData.layout.iconSize + 'px';
+
+            document.getElementById('setSearchWidth').value = appData.search.width;
+            document.getElementById('widthVal').innerText = appData.search.width + 'px';
+            document.getElementById('setSearchPlaceholder').value = appData.search.placeholder;
+
+            document.getElementById('settingsModal').style.display = 'flex';
+        }
+        function saveSettings() {
+            appData.siteTitle = document.getElementById('newSiteTitle').value;
+            appData.siteSubtitle = document.getElementById('newSiteSub').value;
+            appData.siteLogo = document.getElementById('newSiteLogo').value;
+            appData.footer = document.getElementById('newFooter').value;
+            appData.password = document.getElementById('newPassword').value;
+            
+            var bgUrl = document.getElementById('newBgUrl').value;
+            if (bgUrl) {
+                appData.bgUrl = bgUrl;
+            }
+            
+            appData.layout.cols = parseInt(document.getElementById('setLayoutCols').value);
+            appData.layout.iconSize = parseInt(document.getElementById('setIconSize').value);
+            
+            appData.search.width = parseInt(document.getElementById('setSearchWidth').value);
+            appData.search.placeholder = document.getElementById('setSearchPlaceholder').value;
+
+            saveData();
+            closeModal('settingsModal');
+            alert('设置已保存！壁纸更换后，所有访问者都会看到新背景。');
+        }
+
+        // --- 导入导出 ---
+        function exportData() {
+            var dataStr = JSON.stringify(appData, null, 2);
+            if (window.navigator.msSaveBlob) {
+                var blob = new Blob([dataStr], { type: "application/json" });
+                window.navigator.msSaveBlob(blob, "nav-backup.json");
+            } else {
+                var blob = new Blob([dataStr], { type: "application/json" });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url; a.download = "nav-backup.json";
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            }
+        }
+        function importData(input) {
+            var file = input.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    var data = JSON.parse(e.target.result);
+                    if (data.categories && confirm('确定导入？将覆盖当前数据。')) {
+                        appData = data;
+                        if (!appData.layout) appData.layout = { cols: 5, iconSize: 32 };
+                        if (!appData.search) appData.search = { width: 500, placeholder: '搜索...' };
+                        if (!appData.bgUrl) appData.bgUrl = defaultData.bgUrl;
+                        saveData();
+                        location.reload();
+                    }
+                } catch (err) { alert('文件错误'); }
+            };
+            reader.readAsText(file);
+            input.value = '';
+        }
+
+        init();
     </script>
 </body>
 </html>
